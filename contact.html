@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Harshith Sai</title>
+  <style>
+    body {
+      background-color: #353839;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #EFBF04;
+      transition: background-color 0.5s, color 0.5s;
+      text-align: center;
+    }
+    h2 {
+      color: #B59410;
+    }
+    .container {
+      width: 40%;
+      margin: 0 auto;
+      background: #444;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      font-size: 1.2em;
+      color: #EFBF04;
+      display: block;
+      text-align: left;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #888;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    .submit-btn, .home-btn {
+      width: 100%;
+      background-color: #B59410;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .submit-btn:hover, .home-btn:hover {
+      background-color: #8f750b;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Contact Me</h2>
+  
+  <div class="container">
+    <form id="contactForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name">
+      <div class="error" id="nameError"></div>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email">
+      <div class="error" id="emailError"></div>
+
+      <label for="phone">Contact Number:</label>
+      <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+      <div class="error" id="phoneError"></div>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" placeholder="Type your message..."></textarea>
+      <div class="error" id="messageError"></div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <!-- Back to Home Button -->
+    <button onclick="goHome()" class="home-btn">Back to Home</button>
+  </div>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevents form submission
+      
+      let isValid = true;
+
+      // Name validation
+      let name = document.getElementById("name").value.trim();
+      let nameError = document.getElementById("nameError");
+      if (name.length < 3) {
+        nameError.innerText = "Name must be at least 3 characters long.";
+        isValid = false;
+      } else {
+        nameError.innerText = "";
+      }
+
+      // Email validation
+      let email = document.getElementById("email").value.trim();
+      let emailError = document.getElementById("emailError");
+      let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        emailError.innerText = "Please enter a valid email address.";
+        isValid = false;
+      } else {
+        emailError.innerText = "";
+      }
+
+      // Phone number validation (10-digit format)
+      let phone = document.getElementById("phone").value.trim();
+      let phoneError = document.getElementById("phoneError");
+      let phonePattern = /^[6-9]\d{9}$/; // Ensures a valid 10-digit phone number (India)
+      if (!phone.match(phonePattern)) {
+        phoneError.innerText = "Please enter a valid 10-digit phone number.";
+        isValid = false;
+      } else {
+        phoneError.innerText = "";
+      }
+
+      // Message validation
+      let message = document.getElementById("message").value.trim();
+      let messageError = document.getElementById("messageError");
+      if (message.length < 10) {
+        messageError.innerText = "Message must be at least 10 characters long.";
+        isValid = false;
+      } else {
+        messageError.innerText = "";
+      }
+
+      // If all fields are valid, show alert & clear form
+      if (isValid) {
+        alert("Form submitted successfully!");
+        document.getElementById("contactForm").reset();
+      }
+    });
+
+    // Function to go back to Home Page
+    function goHome() {
+      window.location.href ="harshithsai.html" // Redirects to home page
+    }
+  </script>
+
+</body>
+</html>
